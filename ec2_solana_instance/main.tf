@@ -15,27 +15,34 @@ provider "aws" {
 }
 
 resource "aws_instance" "solana_devel_server" {
-  ami             = "ami-0a8b4cd432b1c3063"
-  instance_type   = "t2.medium" #vCPU 2 - GiB 4
-  key_name        = "KeyPairForEC2TestingInstancesVirginia"
+  ami           = "ami-04505e74c0741db8d"
+  instance_type = "t2.medium" #vCPU 2 - GiB 4
+  key_name      = "KeyPairForEC2TestingInstancesVirginia"
+
+  ebs_block_device {
+    device_name = "/dev/sda1"
+    volume_size = 16
+    volume_type = "gp2"
+  }
+
   security_groups = ["${aws_security_group.solana_development_sg.name}"]
 
   # Copies the install-stuff.sh file to /tmp/install-stuff.sh
   provisioner "file" {
-    source      = "install-stuff.sh"
-    destination = "/tmp/install-stuff.sh"
+    source      = "install-ubuntu-stuff.sh"
+    destination = "/tmp/install-ubuntu-stuff.sh"
   }
 
   provisioner "remote-exec" {
     inline = [
-      "chmod +x /tmp/install-stuff.sh",
-      "sudo /tmp/install-stuff.sh"
+      "chmod +x /tmp/install-ubuntu-stuff.sh",
+      "sudo /tmp/install-ubuntu-stuff.sh"
     ]
   }
 
   connection {
     type        = "ssh"
-    user        = "ec2-user"
+    user        = "ubuntu"
     private_key = file("C:\\Users\\rafae\\.aws\\KeyPairForEC2TestingInstancesVirginia.pem")
     host        = self.public_ip
   }

@@ -59,3 +59,9 @@ echo $(yarn --version)
 
 #compile glibc 2.27
 # KONZO https://www.linuxquestions.org/questions/linux-newbie-8/how-do-i-configure-glibc-in-a-separate-build-folder-447521/
+#cargo install --git https://github.com/project-serum/anchor --tag v0.14.0 anchor-cli --locked
+#https://lightcycle.xyz/zero-to-solana-first-deploy/
+
+# create sh file for my environment variables
+# echo "Create /etc/profile.d/myenvvars.sh"
+# touch /etc/profile.d/myenvvars.sh

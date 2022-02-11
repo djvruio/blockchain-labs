@@ -11,11 +11,11 @@ variable "owner" {
 }
 
 variable "project" {
-  type        = string
-  default     = "solana-research"
+  type    = string
+  default = "solana-research"
 }
 
 variable "environment" {
-  type        = string
-  default     = "DEVEL"
+  type    = string
+  default = "DEVEL"
 }
